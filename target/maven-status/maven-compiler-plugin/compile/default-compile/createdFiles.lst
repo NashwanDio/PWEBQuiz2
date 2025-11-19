@@ -1,1 +1,4 @@
+com/example/util/DBConnection.class
+com/example/model/Game.class
+com/example/servlet/GameServlet.class
 com/example/HelloServlet.class

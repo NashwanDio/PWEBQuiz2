@@ -4,14 +4,20 @@
          http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" 
          version="3.1">
 
+    <!-- GameVault Servlet Configuration -->
     <servlet>
-        <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>com.example.HelloServlet</servlet-class>
+        <servlet-name>GameServlet</servlet-name>
+        <servlet-class>com.example.servlet.GameServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>HelloServlet</servlet-name>
-        <url-pattern>/greet</url-pattern>
+        <servlet-name>GameServlet</servlet-name>
+        <url-pattern>/games</url-pattern>
     </servlet-mapping>
+
+    <!-- Welcome File List -->
+    <welcome-file-list>
+        <welcome-file>games</welcome-file>
+    </welcome-file-list>
 
 </web-app>
