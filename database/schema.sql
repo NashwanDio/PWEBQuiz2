@@ -1,8 +1,8 @@
 -- GameVault Database Schema
 -- This script creates the database and table for the GameVault application
 
-CREATE DATABASE IF NOT EXISTS gamevault;
-USE gamevault;
+CREATE DATABASE IF NOT EXISTS gamedb;
+USE gamedb;
 
 CREATE TABLE IF NOT EXISTS games (
     id INT AUTO_INCREMENT PRIMARY KEY,

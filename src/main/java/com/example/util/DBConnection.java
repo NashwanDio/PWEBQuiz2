@@ -5,30 +5,27 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/gamevault?useSSL=false&serverTimezone=UTC";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "";
+    private static Connection connection;
 
-    static {
+    public static Connection getConnection() {
         try {
-            // Load MySQL JDBC Driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException("MySQL JDBC Driver not found", e);
-        }
-    }
+            if (connection == null || connection.isClosed()) {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                String url = System.getenv("DB_URL");
+                String user = System.getenv("DB_USER");
+                String password = System.getenv("DB_PASSWORD");
 
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-    }
+                if (url == null || user == null || password == null) {
+                    url = "jdbc:mysql://localhost:3306/gamedb";
+                    user = "root";
+                    password = "";
+                }
 
-    public static void closeConnection(Connection connection) {
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+                connection = DriverManager.getConnection(url, user, password);
             }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
         }
+        return connection;
     }
 }
